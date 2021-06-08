@@ -103,6 +103,7 @@ public class Payment implements Cloneable, Comparable<Payment>{
 	    if (getClass() != other.getClass())
 	        return false;
 	    Payment p = (Payment) other;
+	    
 	    // Field comparison
 	    return Objects.equals(PaymentID, p.PaymentID) && Objects.equals(PaymentBill, p.PaymentBill) && Objects.equals(PaymentDescription, p.PaymentDescription) && Objects.equals(PaymentDate, p.PaymentDate) && Objects.equals(PaymentContact, p.PaymentContact);
 	}

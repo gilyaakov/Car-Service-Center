@@ -7,12 +7,12 @@ import javax.swing.JOptionPane;
 public class CarServiceCenter {
 	
 	protected static MobilePhone connections;
-	//protected static Finance financeDepartment;
+	protected static Finance financeDepartment;
 	//ArrayList<Printable> WorkStations;
 
 	protected CarServiceCenter() {
 		connections = new MobilePhone();
-		//financeDepartment = new Finance();
+		financeDepartment = new Finance();
 		//WorkStations = new ArrayList<Printable>();
 		//Build up all the 4 stations here
 	}
@@ -41,10 +41,9 @@ public class CarServiceCenter {
 		CarServiceCenter.connections.menu();	
 	}
 	// This function control the finance department
-	/*protected void financeControl() {
-	*	CarServiceCenter.financeDepartment.menu();	
-	*}
-	*/
+	protected void financeControl() {
+		CarServiceCenter.financeDepartment.menu();	
+	}
 	// This function print all the car service center
 	/*protected void printCarServiceCenter() {
 	* 
@@ -72,6 +71,7 @@ public class CarServiceCenter {
 				    this.connectionsControl();
 			        break;
 			  case "6":
+				    this.financeControl();
 			        break;
 			  case "7":
 			        break;
