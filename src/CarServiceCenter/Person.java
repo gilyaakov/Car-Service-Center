@@ -7,10 +7,10 @@ package CarServiceCenter;
 import java.util.Objects;
 import java.util.ArrayList; // import the ArrayList class
 
-public class Person implements Comparable<Person> {
+public class Person implements Comparable<Person>, Cloneable {
     
 	// Variables declaration
-	private String name, phoneNumber;
+	protected String name, phoneNumber;
 	
 	// Default Constructor
 	protected Person(){
@@ -51,10 +51,22 @@ public class Person implements Comparable<Person> {
 	    // Field comparison
 	    return Objects.equals(name, person.name) && Objects.equals(phoneNumber, person.phoneNumber);
 	}
+	@Override
+	public int hashCode() {
+	    final int prime = 31;
+	    int result = 1;
+	    result = prime * result + name.hashCode();
+	    result = prime * result + (int) (phoneNumber.hashCode() ^ (phoneNumber.hashCode() >>> 32));
+	    return result;
+	}
 	// compareTo implement
 	@Override
 	public int compareTo(Person o) {
 		return name.compareTo(o.name);
 	}
+	@Override
+    protected Person clone() throws CloneNotSupportedException { 
+        return (Person)super.clone();
+    }
 }
 
