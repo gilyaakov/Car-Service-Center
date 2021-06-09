@@ -182,8 +182,7 @@ public class Diary {
 	// User menu
 	protected void menu() {
 		while(true) {
-			OptionPane menu = new OptionPane(this.printMenu());
-			switch (menu.option) {
+			switch (CarServiceCenter.menu.waitForOption(this.printMenu())) {
 			  case "1":
 				  try {
 				    this.addMeeting();
@@ -223,7 +222,7 @@ public class Diary {
 	}
 	// Printing the menu
 	protected String printMenu() {
-		String str1,str2,str3,str4,str5,str6,str7,str8;
+		String str1,str2,str3,str4,str5,str6,str7;
 		str1 = "1. Add Event\n";
 		str2 = "2. Delete Event\n";
 		str3 = "3. Print Date schedule\n";
@@ -231,7 +230,6 @@ public class Diary {
 		str5 = "5. Identify if there are colliding events\n";
 		str6 = "6. Print diary\n";
 		str7 = "7. Exit\n";
-		str8 = "Enter option:\n";
-		return str1+str2+str3+str4+str5+str6+str7+str8;
+		return str1+str2+str3+str4+str5+str6+str7;
 	}
 }

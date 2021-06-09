@@ -227,11 +227,10 @@ public class MsgSystem {
 	{
 		while(true) 
 		{
-			OptionPane menu = new OptionPane(this.printMenu());	
 			//  update our SMS contacts according to the new phone book
 			if(this.contactAmount >0) {updateMsgSystem(pb);}
 			String name;
-			switch (menu.option) 
+			switch (CarServiceCenter.menu.waitForOption(this.printMenu())) 
 			{
 			  case "1":
 				  try {
@@ -266,15 +265,14 @@ public class MsgSystem {
 	}
 	protected String printMenu() 
 	{
-		String str1,str2,str3,str4,str5,str6,str7;
+		String str1,str2,str3,str4,str5,str6;
 		str1 = "1. Add corresponding with contact\n";
 		str2 = "2. Delete corresponding with contact\n";
 		str3 = "3. Print corresponding with contact\n";
 		str4 = "4. Search an expression\n";
 		str5 = "5. Print all corresponding\n";
 		str6 = "6. Exit\n";
-		str7 = "Enter option:\n";
-		return str1+str2+str3+str4+str5+str6+str7;
+		return str1+str2+str3+str4+str5+str6;
 	}
 }
 

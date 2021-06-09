@@ -187,8 +187,7 @@ public class PhoneBook {
 	// User menu
 	protected void menu() {
 		while(true) {
-			OptionPane menu = new OptionPane(this.printMenu());
-			switch (menu.option) {
+			switch (CarServiceCenter.menu.waitForOption(this.printMenu())) {
 			  case "1":
 				    String name = JOptionPane.showInputDialog("Enter name:"); // Read user input
 				    String phoneNumber = JOptionPane.showInputDialog("Enter phone number:"); // Read user input       
@@ -235,7 +234,7 @@ public class PhoneBook {
 	}
 	// Printing the menu
 	protected String printMenu() {
-		String str1,str2,str3,str4,str5,str6,str7,str8,str9,str10,str11,str12;
+		String str1,str2,str3,str4,str5,str6,str7,str8,str9,str10,str11;
 		str1 = "1. Add new contact member\n";
 		str2 = "2. Delete contact member by name\n";
 		str3 = "3. Print phonebook to screen\n";
@@ -247,8 +246,7 @@ public class PhoneBook {
 		str9 = "9. Save phonebook in text file\n";
 		str10 = "10. Load text file to phonebook\n";
 		str11 = "11. Exit\n";
-		str12 = "Enter option:\n";
-		return str1+str2+str3+str4+str5+str6+str7+str8+str9+str10+str11+str12;
+		return str1+str2+str3+str4+str5+str6+str7+str8+str9+str10+str11;
 	}
 }
 

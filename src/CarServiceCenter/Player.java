@@ -65,8 +65,7 @@ public class Player {
 	    // User menu
 		protected void menu() {
 			while(true) {
-				OptionPane menu = new OptionPane(this.printMenu());
-				switch (menu.option) {
+				switch (CarServiceCenter.menu.waitForOption(this.printMenu())) {
 				        case "1":
 				        	     try {
 							          this.addMedia();
@@ -93,12 +92,11 @@ public class Player {
 		}
 		// Printing the menu
 		protected String printMenu() {
-			String str1,str2,str3,str4,str5;
+			String str1,str2,str3,str4;
 			str1 = "1. Add Media\n";
 			str2 = "2. Play Media by name\n";
 			str3 = "3. Play all\n";
 			str4 = "4. Exit\n";
-			str5 = "Enter option:\n";
-			return str1+str2+str3+str4+str5;
+			return str1+str2+str3+str4;
 		}
 }

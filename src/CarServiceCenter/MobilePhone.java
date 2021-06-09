@@ -43,8 +43,7 @@ public class MobilePhone {
 	// User menu
 	protected void menu() {
 		while(true) {
-			OptionPane menu = new OptionPane(this.printMenu());
-			switch (menu.option) {
+			switch (CarServiceCenter.menu.waitForOption(this.printMenu())) {
 			  case "1":
 				    this.PhoneBookControl();
 			        break;
@@ -73,14 +72,13 @@ public class MobilePhone {
 	}
 	// Printing the menu
 	protected String printMenu() {
-		String str1,str2,str3,str4,str5,str6,str7;
+		String str1,str2,str3,str4,str5,str6;
 		str1 = "1. PhoneBook\n";
 		str2 = "2. SMS\n";
 		str3 = "3. Diary\n";
 		str4 = "4. Media\n";
 		str5 = "5. Print\n";
 		str6 = "6. Exit\n";
-		str7 = "Enter option:\n";
-		return str1+str2+str3+str4+str5+str6+str7;
+		return str1+str2+str3+str4+str5+str6;
 	}
 }

@@ -8,8 +8,6 @@ public class Payment implements Cloneable, Comparable<Payment>{
 	private String PaymentDescription;
 	protected Date PaymentDate;
 	protected Person PaymentContact;
-	public static final Comparator<Payment> PaymentBillComparator = null;
-	public static final Comparator<Payment> PaymentDateComparator = null;
 	
 	// Default constructor
 	protected Payment() {
@@ -70,19 +68,6 @@ public class Payment implements Cloneable, Comparable<Payment>{
 	@Override
 	public int compareTo(Payment p) {
 		return Integer.compare(this.PaymentID, p.PaymentID);
-	}
-	// Define types of sorting
-    public class PaymentBillComparator implements Comparator<Payment> {
-		@Override
-		public int compare(Payment first,Payment second) {
-		   return Integer.compare(first.PaymentBill, second.PaymentBill);
-		}
-    }
-	public class PaymentDateComparator implements Comparator<Payment> {
-		@Override
-		public int compare(Payment first,Payment second) {
-		   return first.getPaymentDate().compareTo(second.getPaymentDate());
-		}
 	}
 	@Override
     protected Payment clone() throws CloneNotSupportedException {

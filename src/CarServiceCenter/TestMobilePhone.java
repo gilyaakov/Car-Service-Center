@@ -10,9 +10,6 @@ public class TestMobilePhone {
 	
 	public static void main(String[] args) throws CloneNotSupportedException {
 		CarServiceCenter c = new CarServiceCenter();
-		c.financeDepartment.addPayment(100, "Gil", "0547236694", "Tiers");
-		c.financeDepartment.addPayment(300, "Dani", "0545637998", "Electric");
-		c.financeDepartment.addPayment(300, "Dani", "0545637998", "Electric");
-		c.financeDepartment.printPayments();
+		c.mainMenu();
 	}
 }
