@@ -1,4 +1,4 @@
-package src;
+package CarServiceCenter;
 
 
 // TODO: Check cloneable - says realy hard to do right
@@ -54,9 +54,5 @@ public abstract class WorkStation
 		this.vehicle_id = vehicle_id;
 	}
 	
-	// TODO: Add print method here
-	
-	
-	
-	
+	// TODO: Add print method here	
 }

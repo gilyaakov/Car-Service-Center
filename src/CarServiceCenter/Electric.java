@@ -1,4 +1,4 @@
-package src;
+package CarServiceCenter;
 
 import java.util.concurrent.Semaphore;
 
@@ -14,10 +14,9 @@ public class Electric extends WorkStation
 	}
 	
 	// TODO: Add car input - adjust prints and variables after done
-	public void startEngine()
+	public void startEngine(Vehicle car)
 	{
-		
-		System.out.println("Insert Car Id -- Wating for Engine fix");
+		System.out.println("Car number " + car.getLicensePlateNum() + "Wating for inspection");
 		// Lock the Station
 		try {
 			this.sem.acquire();
@@ -25,7 +24,7 @@ public class Electric extends WorkStation
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Insert Car Id -- started Engine fix");
+		System.out.println("Car number " + car.getLicensePlateNum() + "started Engine fix");
 		
 		// Sleep for the duration of the station work - make sure assign this.duration right
 		// Note: We multiply the duration with the number of tires!
@@ -37,7 +36,8 @@ public class Electric extends WorkStation
 		};
 		
 		// Release Semaphore
-		System.out.println("Electric station Done with car: Add id when integrating");
+		
+		System.out.println("Electric station Done with car: " + car.getLicensePlateNum() + " Add id when integrating");
 		this.sem.release();
 		
 	}

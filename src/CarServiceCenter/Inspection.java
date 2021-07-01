@@ -1,4 +1,4 @@
-package src;
+package CarServiceCenter;
 import java.util.concurrent.Semaphore;
 import java.util.Random;
 
@@ -6,27 +6,28 @@ import java.util.Random;
 public class Inspection extends WorkStation  
 {
 	private Semaphore sem;
-	private static int allowed = 2;	// Lets do that 2 car can be inspected at the same time
+	private static int allowed = 2;		// Lets do that 2 car can be inspected at the same time
 	
-	public Inspection(String name, int price, int duration, int counter, int id, Semaphore sema) {
+	public Inspection(String name, int price, int duration, int counter, int id, Semaphore sema) 
+	{
 		super( name,  price,  duration,  counter,  id);
 		this.sem = new Semaphore(allowed);
 	}
 	
 	// TODO: Add car input - adjust prints and variables after done
 	// TODO: need to write to the car WorkStation ArrayList via setter
-	public void startInspection()
+	public void startInspection(Vehicle car)
 	{	
 		// Lock the Station
-		System.out.println("Insert Car Id -- Wating for inspection");
-
+		System.out.println("Car number " + car.getLicensePlateNum() + "Wating for inspection");
+		
 		try {
 			this.sem.acquire();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Insert Car Id -- started inspection");
+		System.out.println("Car number " + car.getLicensePlateNum() +  "started inspection");
 		
 		// Randomize the fixes the Car need
 		Random rand = new Random();
@@ -36,28 +37,28 @@ public class Inspection extends WorkStation
         
         if(rand_int1 == 1)
         {
-        	// TODO: add Tires to Car
+        	car.setStation(1);
         }
         if(rand_int2 == 1)
         {
-        	// TODO: add Engine to Car
+        	car.setStation(2);
         }
         if(rand_int3 == 1)
         {
-        	// TODO: add Electric to Car
+        	car.setStation(3);
         }
         
 		// Sleep for the duration of the station work - make sure assign this.duration right
-		try {
+		try
+		{
 			Thread.sleep(this.getDuration());
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		};
         
-        System.out.println("Inspection Done with car: Add id when integrating");    
+        System.out.println("Inspection Done with car: " + car.getLicensePlateNum());    
 		this.sem.release();
-	
 	}
 
 }

@@ -1,26 +1,60 @@
-package Targil3_pack;
+package CarServiceCenter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.lang.Cloneable;
 
 public abstract class Vehicle extends Thread implements Cloneable{
 	String vehicle_type;
 	int manufacture_year;
-	String license_plate_num;  //changed from int to string
+	String license_plate_num;  		//changed from int to string
 	String owner_name;
 	String owner_phone;
 	int bill=0;
-	ArrayList<String> work_stations = new ArrayList<String>();
+	List<Boolean> work_stations; 
 	
-	public Vehicle(String type, int year, String license, String owner_name, String owner_phone, ArrayList<String> stations) {
+	public Vehicle(String type, int year, String license, String owner_name, String owner_phone) {
 	    this.vehicle_type = type;
 	    this.manufacture_year = year;
 	    this.license_plate_num = license;
 	    this.owner_name = owner_name;
 	    this.owner_phone = owner_phone;
-	    this.work_stations = stations;
+	    List<Boolean> list=new ArrayList<Boolean>(Arrays.asList(new Boolean[2]));
+	    Collections.fill(list, Boolean.FALSE);
+	    this.work_stations = list;
 	}
 	
+	public void setStation(int st)
+	{
+		if(st == 1)
+		{
+			this.work_stations.set(0 ,true);
+		}
+		
+		else if(st == 2)
+		{
+			this.work_stations.set(1 ,true);
+		}
+			
+		else if(st == 3)
+		{
+			this.work_stations.set(2 ,true);
+		}
+		else
+		{
+			System.out.println("Wrong input to set funtion");	//TODO: delete later after debug
+		}		
+			
+		
+	}
+	
+	public List<Boolean> getStations()
+	{
+		return this.work_stations;
+		
+	}
 	 public String getType() {
 		 return this.vehicle_type;
 	 }
@@ -53,9 +87,12 @@ public abstract class Vehicle extends Thread implements Cloneable{
 		this.vehicle_type=type;
 	}
 	
+	
+	/*
 	public void addStation(String station ) {
 		this.work_stations.add(station);
 	}
+	*/
 	
 	public String toString() {
 	    return (vehicle_type.toString() + " " +"|" + manufacture_year + " " +"|" + license_plate_num.toString() + " " +"|" + owner_name.toString() + " " +"|" +

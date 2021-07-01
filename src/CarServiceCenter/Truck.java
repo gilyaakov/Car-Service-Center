@@ -1,12 +1,12 @@
-package Targil3_pack;
-
+package CarServiceCenter;
 import java.util.ArrayList;
 
 public class Truck extends Vehicle{
 int wheels;
 	
-	public Truck(String type, int year, String license, String owner_name, String owner_phone, ArrayList<String> stations, int wheels) {
-		super( type,  year,  license,  owner_name,  owner_phone, stations);
+	public Truck(String type, int year, String license, String owner_name, String owner_phone, int wheels) 
+	{
+		super( type,  year,  license,  owner_name,  owner_phone);
 		this.wheels=wheels;
 	}
 	

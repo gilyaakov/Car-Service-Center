@@ -21,7 +21,7 @@ public class OptionPane {
                  f.setSize(500, 500);
                  f.setVisible(true);
        }
-       public String waitForOption(String menu) {
+       public String waitForOption(String menu){
     	   JPanel MyPanel = new JPanel();
            MyPanel.setLayout(new GridLayout(3,3));  // 4x3 Grid
            JButton btn;
