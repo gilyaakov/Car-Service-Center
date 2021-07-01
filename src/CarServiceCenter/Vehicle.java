@@ -9,7 +9,7 @@ import java.lang.Cloneable;
 public abstract class Vehicle extends Thread implements Cloneable{
 	String vehicle_type;
 	int manufacture_year;
-	String license_plate_num;  		//changed from int to string
+	String license_plate_num;
 	String owner_name;
 	String owner_phone;
 	int bill=0;
@@ -21,7 +21,7 @@ public abstract class Vehicle extends Thread implements Cloneable{
 	    this.license_plate_num = license;
 	    this.owner_name = owner_name;
 	    this.owner_phone = owner_phone;
-	    List<Boolean> list=new ArrayList<Boolean>(Arrays.asList(new Boolean[2]));
+	    List<Boolean> list=new ArrayList<Boolean>(Arrays.asList(new Boolean[3]));
 	    Collections.fill(list, Boolean.FALSE);
 	    this.work_stations = list;
 	}
@@ -41,13 +41,7 @@ public abstract class Vehicle extends Thread implements Cloneable{
 		else if(st == 3)
 		{
 			this.work_stations.set(2 ,true);
-		}
-		else
-		{
-			System.out.println("Wrong input to set funtion");	//TODO: delete later after debug
-		}		
-			
-		
+		}			
 	}
 	
 	public List<Boolean> getStations()
@@ -86,51 +80,41 @@ public abstract class Vehicle extends Thread implements Cloneable{
 	public void setType(String type){
 		this.vehicle_type=type;
 	}
-	
-	
-	/*
-	public void addStation(String station ) {
-		this.work_stations.add(station);
-	}
-	*/
-	
 	public String toString() {
 	    return (vehicle_type.toString() + " " +"|" + manufacture_year + " " +"|" + license_plate_num.toString() + " " +"|" + owner_name.toString() + " " +"|" +
 	    		owner_phone.toString() + " " + "|" + bill);
 	}
-	
-	//public string returnStations() {
-	//	
-	//}
-	
 	@Override
-    protected Object clone()
+    protected Vehicle clone()
         throws CloneNotSupportedException
     {
-        return super.clone();
+        return (Vehicle)super.clone();
     }
-	
-	/* public void run()  
-	    {    
-	        System.out.println("Vehicle starts repair..."); 
+	public void run() {
+		((Inspection)CarServiceCenter.WorkStations.get(3)).startInspection(this);
+		CarServiceCenter.menu.add("Car number: " + this.getLicensePlateNum() +  " started Repair");
 	        this.startRepair();
 	    }  
-	 
-	 public void startRepair() {
-		 for (int i=0; i<work_stations.size(); i++) {
-			 if (work_stations.get(i)=="Inspection"){
-				 super.WorkStation[0].startInspection();
-			 } 
-			 if (work_stations.get(i)=="Electric"){
-				 super.WorkStation[1].startElectric();
-			 } 	 
-			 if (work_stations.get(i)=="Engine"){
-				 super.WorkStation[2].startEngine();
-			 } 	 
-			 if (work_stations.get(i)=="Tiers"){
-				 super.WorkStation[0].startTiers();
-			 } 
-		 }		 
-	 } */
-	 
+	public void startRepair() {
+		 
+		String s = "";
+		 
+		 if (this.work_stations.get(0)){
+			 ((Tiers)CarServiceCenter.WorkStations.get(0)).startTiers(this);
+			 s+="Tiers ";
+		 }
+		 if (this.work_stations.get(1)){
+			 ((Electric)CarServiceCenter.WorkStations.get(1)).startElectric(this);
+			 s+="Electric ";
+		 }
+		 if (this.work_stations.get(2)){
+			 ((Engine)CarServiceCenter.WorkStations.get(2)).startEngine(this);
+			 s+="Engine ";
+		 }
+		 try {
+			CarServiceCenter.financeDepartment.addPayment(bill, owner_phone, owner_name, s);
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+	}
 }

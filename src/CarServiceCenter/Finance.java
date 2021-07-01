@@ -22,7 +22,7 @@ public class Finance {
 		Profit = profit;
 	}
 	// This function add payment to payments hashMap (called by the threads)
-	protected void addPayment(int Bill, String OwnerName,String OwnerCellPhone, String PaymentDescription) throws CloneNotSupportedException {
+	protected synchronized void addPayment(int Bill, String OwnerName,String OwnerCellPhone, String PaymentDescription) throws CloneNotSupportedException {
 		Random rand = new Random();
 		// Generate random integers in range 0 to 99999
 		Integer PaymentID = rand.nextInt(99999);

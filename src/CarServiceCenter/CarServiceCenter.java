@@ -1,5 +1,6 @@
 package CarServiceCenter;
 
+import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.JOptionPane;
@@ -8,44 +9,154 @@ public class CarServiceCenter {
 	
 	protected static MobilePhone connections;
 	protected static Finance financeDepartment;
-	//ArrayList<Printable> WorkStations;
+	protected static ArrayList<WorkStation> WorkStations;
 	protected static OptionPane menu;
 
 	protected CarServiceCenter() throws CloneNotSupportedException {
 		connections = new MobilePhone();
 		financeDepartment = new Finance();
 		menu = new OptionPane();
-		//Test
-				this.financeDepartment.addPayment(300, "Gil", "0547236694", "Tiers");
-				this.financeDepartment.addPayment(50, "Dani", "0545637998", "Electric");
-				this.financeDepartment.addPayment(10, "Ana", "0534567785", "Electric");
-				this.financeDepartment.addPayment(450, "Bob", "0568947556", "Tiers+Engine");
-				this.financeDepartment.addPayment(240, "Tamar", "0523458994", "Engine");
-				this.financeDepartment.addPayment(1000, "Ravit", "0586948335", "Tiers");
-		// End test
-		//WorkStations = new ArrayList<Printable>();
-		//Build up all the 4 stations here
+		WorkStations = new ArrayList<WorkStation>();
+		Tiers s1 = new Tiers("Boaz", 300, 1000, 0);
+		Electric s2 = new Electric("Hezi", 400, 1000, 0);
+		Engine s3 = new Engine("Eli", 500, 1000, 0);
+		Inspection s4 = new Inspection("Ron", 600, 100, 0);
+		CarServiceCenter.WorkStations.add(s1);
+		CarServiceCenter.WorkStations.add(s2);
+		CarServiceCenter.WorkStations.add(s3);
+		CarServiceCenter.WorkStations.add(s4);
 	}
-	// This function add work stations to WorkStations array
-	/*protected void addStation(WorkStation s) {
-	*	
-	*}
-	*/
-	// This function print station by name
-	/*protected void printStation(String name) {
-	*	
-	*}
-	*/
 	// This function set station parameters
-	/*protected void setStation() {
-	*	
-	*}
-	*/
+	protected void setStation() throws Exception{
+		String option = " "; 
+		option = JOptionPane.showInputDialog("Enter Option: 1. Tiers 2. Electric 3. Engine 4. Inspection"); // Read user input
+		if(option == null) {return;}
+		String name;
+		int price;
+		int duration;
+		try {
+		switch (option) {
+		  case "1":
+			    name = JOptionPane.showInputDialog("Enter station manager name:"); // Read user input
+			    if(name == null) {return;}
+			    CarServiceCenter.WorkStations.get(0).setStation_manager(name);
+			    try {
+				    price = Integer.parseInt(JOptionPane.showInputDialog("Enter price:")); // Read user input
+				    }
+				    catch(NumberFormatException e) {
+				    	return;
+				    }
+			    if(price < 1 || price > 1000) { // Input integrity check
+			    	JOptionPane.showMessageDialog(null,"Illegal price","ERROR",JOptionPane.PLAIN_MESSAGE);
+			    	break;
+			    }
+			    CarServiceCenter.WorkStations.get(0).setPrice(price);
+			    try {
+			    duration = Integer.parseInt(JOptionPane.showInputDialog("Enter duration:")); // Read user input
+			    }
+			    catch(NumberFormatException e) {
+			    	return;
+			    }
+			    if(duration < 1 || duration > 1000) { // Input integrity check
+			    	JOptionPane.showMessageDialog(null,"duration","ERROR",JOptionPane.PLAIN_MESSAGE);
+			    	break;
+			    }
+			    CarServiceCenter.WorkStations.get(0).setDuration(duration);
+		        break;
+		  case "2":
+			    name = JOptionPane.showInputDialog("Enter station manager name:"); // Read user input
+			    if(name == null) {return;}
+			    CarServiceCenter.WorkStations.get(1).setStation_manager(name);
+			    try {
+				    price = Integer.parseInt(JOptionPane.showInputDialog("Enter price:")); // Read user input
+				    }
+				    catch(NumberFormatException e) {
+				    	return;
+				    }
+			    if(price < 1 || price > 1000) { // Input integrity check
+			    	JOptionPane.showMessageDialog(null,"Illegal price","ERROR",JOptionPane.PLAIN_MESSAGE);
+			    	break;
+			    }
+			    CarServiceCenter.WorkStations.get(1).setPrice(price);
+			    try {
+				    duration = Integer.parseInt(JOptionPane.showInputDialog("Enter duration:")); // Read user input
+				    }
+				    catch(NumberFormatException e) {
+				    	return;
+				    }
+			    if(duration < 1 || duration > 1000) { // Input integrity check
+			    	JOptionPane.showMessageDialog(null,"duration","ERROR",JOptionPane.PLAIN_MESSAGE);
+			    	break;
+			    }
+			    CarServiceCenter.WorkStations.get(1).setDuration(duration);
+		        break;
+		  case "3":
+			    name = JOptionPane.showInputDialog("Enter station manager name:"); // Read user input
+			    if(name == null) {return;}
+			    CarServiceCenter.WorkStations.get(2).setStation_manager(name);
+			    try {
+			    price = Integer.parseInt(JOptionPane.showInputDialog("Enter price:")); // Read user input
+			    }
+			    catch(NumberFormatException e) {
+			    	return;
+			    }
+			    if(price < 1 || price > 1000) { // Input integrity check
+			    	JOptionPane.showMessageDialog(null,"Illegal price","ERROR",JOptionPane.PLAIN_MESSAGE);
+			    	break;
+			    }
+			    CarServiceCenter.WorkStations.get(2).setPrice(price);
+			    try {
+				    duration = Integer.parseInt(JOptionPane.showInputDialog("Enter duration:")); // Read user input
+				    }
+				    catch(NumberFormatException e) {
+				    	return;
+				    }
+			    if(duration < 1 || duration > 1000) { // Input integrity check
+			    	JOptionPane.showMessageDialog(null,"duration","ERROR",JOptionPane.PLAIN_MESSAGE);
+			    	break;
+			    }
+			    CarServiceCenter.WorkStations.get(2).setDuration(duration);
+		        break;
+		  case "4":
+			    name = JOptionPane.showInputDialog("Enter station manager name:"); // Read user input
+			    if(name == null) {return;}
+			    CarServiceCenter.WorkStations.get(3).setStation_manager(name);
+			    try {
+				    price = Integer.parseInt(JOptionPane.showInputDialog("Enter price:")); // Read user input
+				    }
+				    catch(NumberFormatException e) {
+				    	return;
+				    }
+			    if(price < 1 || price > 1000) { // Input integrity check
+			    	JOptionPane.showMessageDialog(null,"Illegal price","ERROR",JOptionPane.PLAIN_MESSAGE);
+			    	break;
+			    }
+			    CarServiceCenter.WorkStations.get(3).setPrice(price);
+			    try {
+				    duration = Integer.parseInt(JOptionPane.showInputDialog("Enter duration:")); // Read user input
+				    }
+				    catch(NumberFormatException e) {
+				    	return;
+				    }
+			    if(duration < 1 || duration > 1000) { // Input integrity check
+			    	JOptionPane.showMessageDialog(null,"duration","ERROR",JOptionPane.PLAIN_MESSAGE);
+			    	break;
+			    }
+			    CarServiceCenter.WorkStations.get(3).setDuration(duration);
+		        break;
+		  default:
+			    JOptionPane.showMessageDialog(null,"No such option","ERROR",JOptionPane.PLAIN_MESSAGE);
+		}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	// This function print all the work stations
-	/*protected void printWorkStations() {
-	*	
-	*}
-	*/
+	protected void printWorkStations() {
+		JOptionPane.showMessageDialog(null,WorkStations,"Work Stations",JOptionPane.PLAIN_MESSAGE);
+		
+	}
 	// This function control the mobile phone
 	protected void connectionsControl() {
 		CarServiceCenter.connections.menu();	
@@ -63,37 +174,48 @@ public class CarServiceCenter {
 	    JOptionPane.showMessageDialog(null,connections.smsSystem.printAllCorresponding(),"Messages",JOptionPane.PLAIN_MESSAGE);
 	    JOptionPane.showMessageDialog(null,connections.myPlayer.playAll(),"Player",JOptionPane.PLAIN_MESSAGE);
 		JOptionPane.showMessageDialog(null,financeDepartment,"Finance Department",JOptionPane.PLAIN_MESSAGE);
-	 
+		JOptionPane.showMessageDialog(null,WorkStations,"Work Stations",JOptionPane.PLAIN_MESSAGE);
 	}
 	// This function make simulation
-	/*protected void simulation() {
-	* 
-	*}
-	*/
+	protected void simulation() throws InterruptedException {
+		CarServiceCenter.menu.simulation();
+		CarFactory c = new CarFactory();
+		for(int i = 0 ; i < 2 ; i++) {
+			c.getCar().start();
+			Thread.sleep(1000);
+			c.resetFactory();
+		}
+	}
 	// This function is the main menu
 	protected void mainMenu() {
 		while(true) {
 			switch (menu.waitForOption(this.printMenu())) {
 			  case "1":
+				try {
+					this.setStation();
+				} catch (Exception e1) {
+				}
 			        break;
 			  case "2":
+				    this.printWorkStations();
 			        break;
 			  case "3":
-			        break;
-			  case "4":
-			        break;
-			  case "5":
 				    this.connectionsControl();
 			        break;
-			  case "6":
+			  case "4":
 				    this.financeControl();
 			        break;
-			  case "7":
+			  case "5":
 				    this.printCarServiceCenter();
 			        break;
-			  case "8":
+			  case "6":
+				try {
+					this.simulation();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			        break;
-			  case "9":
+			  case "7":
 				    menu.close();
 				    JOptionPane.showMessageDialog(null,"Goodbye!","Note",JOptionPane.PLAIN_MESSAGE);
 				    return;
@@ -104,17 +226,14 @@ public class CarServiceCenter {
 	}
 	// Printing the menu
 	protected String printMenu() {
-		String str1,str2,str3,str4,str5,str6,str7,str8,str9;
-		str1 = "1. Add Station\n";
-		str2 = "2. Print Station\n";
-		str3 = "3. Set Station\n";
-		str4 = "4. Print Work Stations\n";
-		str5 = "5. Connections\n";
-		str6 = "6. Finance Department\n";
-		str7 = "7. Print Car Service Center\n";
-		str8 = "8. Simulation\n";
-		str9 = "9. Exit\n";
-		return str1+str2+str3+str4+str5+str6+str7+str8+str9;
+		String str1,str2,str3,str4,str5,str6,str7;
+		str1 = "1. Set Station\n";
+		str2 = "2. Print Work Stations\n";
+		str3 = "3. Connections\n";
+		str4 = "4. Finance Department\n";
+		str5 = "5. Print Car Service Center\n";
+		str6 = "6. Simulation\n";
+		str7 = "7. Exit\n";
+		return str1+str2+str3+str4+str5+str6+str7;
 	}
-
 }

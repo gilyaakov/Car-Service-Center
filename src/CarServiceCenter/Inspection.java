@@ -8,32 +8,29 @@ public class Inspection extends WorkStation
 	private Semaphore sem;
 	private static int allowed = 2;		// Lets do that 2 car can be inspected at the same time
 	
-	public Inspection(String name, int price, int duration, int counter, int id, Semaphore sema) 
+	public Inspection(String name, int price, int duration, int counter) 
 	{
-		super( name,  price,  duration,  counter,  id);
+		super( name,  price,  duration,  counter);
 		this.sem = new Semaphore(allowed);
 	}
-	
-	// TODO: Add car input - adjust prints and variables after done
-	// TODO: need to write to the car WorkStation ArrayList via setter
 	public void startInspection(Vehicle car)
 	{	
 		// Lock the Station
-		System.out.println("Car number " + car.getLicensePlateNum() + "Wating for inspection");
-		
+		CarServiceCenter.menu.add("Car number: " + car.getLicensePlateNum() + " Waiting for inspection");
+		car.setBill(this.getPrice());
 		try {
 			this.sem.acquire();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Car number " + car.getLicensePlateNum() +  "started inspection");
-		
+		CarServiceCenter.menu.add("Car number: " + car.getLicensePlateNum() +  " started inspection");
+		this.setVehicle_id(car.getLicensePlateNum());
+		this.setCounter(this.getCounter() + 1);
 		// Randomize the fixes the Car need
 		Random rand = new Random();
-	    int rand_int1 = rand.nextInt(1);
-        int rand_int2 = rand.nextInt(1);
-        int rand_int3 = rand.nextInt(1);
+	    int rand_int1 = rand.nextInt(2);
+        int rand_int2 = rand.nextInt(2);
+        int rand_int3 = rand.nextInt(2);
         
         if(rand_int1 == 1)
         {
@@ -47,17 +44,14 @@ public class Inspection extends WorkStation
         {
         	car.setStation(3);
         }
-        
 		// Sleep for the duration of the station work - make sure assign this.duration right
 		try
 		{
 			Thread.sleep(this.getDuration());
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		};
-        
-        System.out.println("Inspection Done with car: " + car.getLicensePlateNum());    
+		CarServiceCenter.menu.add("Inspection Done with car: " + car.getLicensePlateNum());
 		this.sem.release();
 	}
 

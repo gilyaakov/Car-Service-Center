@@ -5,41 +5,41 @@ import java.util.concurrent.Semaphore;
 public class Electric extends WorkStation  
 {
 
-	// TODO: add variable like tires? 
+	// TODO: add variable like tires?
 	private Semaphore sem;
 	
-	public Electric(String name, int price, int duration, int counter, int id) {
-		super( name,  price,  duration,  counter,  id);
+	public Electric(String name, int price, int duration, int counter) {
+		super( name,  price,  duration,  counter);
 		this.sem = new Semaphore(1);
 	}
 	
-	// TODO: Add car input - adjust prints and variables after done
-	public void startEngine(Vehicle car)
+	public void startElectric(Vehicle car)
 	{
-		System.out.println("Car number " + car.getLicensePlateNum() + "Wating for inspection");
+		CarServiceCenter.menu.add("Car number: " + car.getLicensePlateNum() + " " + "Waiting for Electric");
+		car.setBill(this.getPrice()+car.getBill());
 		// Lock the Station
 		try {
 			this.sem.acquire();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Car number " + car.getLicensePlateNum() + "started Engine fix");
-		
+		CarServiceCenter.menu.add("Car number: " + car.getLicensePlateNum() + " " + "started Electric fix");
+		this.setVehicle_id(car.getLicensePlateNum());
+		this.setCounter(this.getCounter() + 1);
 		// Sleep for the duration of the station work - make sure assign this.duration right
 		// Note: We multiply the duration with the number of tires!
 		try {
 			Thread.sleep(this.getDuration());
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		};
-		
 		// Release Semaphore
-		
-		System.out.println("Electric station Done with car: " + car.getLicensePlateNum() + " Add id when integrating");
-		this.sem.release();
-		
+		CarServiceCenter.menu.add("Electric Station Done for car: " + car.getLicensePlateNum());
+		this.sem.release();	
 	}
-
+	// toString override
+	@Override
+	public String toString(){
+		return super.toString();
+	}
 }
